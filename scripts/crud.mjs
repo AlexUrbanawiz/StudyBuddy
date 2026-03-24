@@ -1,7 +1,8 @@
 import { db } from "./firebase";
 import { collection, addDoc, getDocs, doc, setDoc, deleteDoc } from "firebase/firestore";
 
-async function addUser(userInfo){
+async function addUser(first_nameP, last_nameP, ){
+    await addDoc(collection(db, "users"), { first_name: first_nameP, last_name: last_nameP, age: 30 });
 }
 
 async function getUser(email) {
