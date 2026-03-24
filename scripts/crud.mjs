@@ -1,13 +1,23 @@
 import { db } from "./firebase";
 import { collection, addDoc, getDocs, doc, setDoc, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore"; /* Possibly to be added to the import above */
 
 async function addUser(first_nameP, last_nameP, ){
     await addDoc(collection(db, "users"), { first_name: first_nameP, last_name: last_nameP, age: 30 });
 }
 
 async function getUser(email) {
-    
-}
+    const q = query(collection(db, "users"), where("email", "==", email));
+    const snap = await getDocs(q);
+
+    if (snap.empty) {
+        console.log("No user found with that email.");
+        return null;
+    }
+
+    const userDoc = snap.docs[0];
+    return { id: userDoc.id, ...userDoc.data() };
+  }
 
 async function findBuddies(){
     
