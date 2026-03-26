@@ -1,5 +1,7 @@
 import { db, auth } from "./main.mjs";
 import { collection, addDoc, getDocs, doc, setDoc, deleteDoc, query, where } from "firebase/firestore";
+import {User} from "./user.js";
+import {findMatches} from "../sort.js"
 
 // Internal helper — throws if no user is signed in
 function requireUser() {
@@ -26,6 +28,16 @@ async function getUserByEmail(email) {
   return { id: userDoc.id, ...userDoc.data() };
 }
 
-async function findBuddies() {
-  // TODO: Implement buddy matching logic
+/**
+ *
+ * @param {User}userData
+ */
+async function findBuddies(userData) {
+    let student = userData.getStudent();
+
+    let pool = getDocs(query(collection(db, "users"))).map(item => new User(item).getStudent());
+
+
+    return findMatches(student, pool);
+
 }

@@ -14,7 +14,7 @@
 
 const DAYS = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 
-class Student {
+export class Student {
   /**
    * @param {Object} timeRanges  - { monday: [[800, 1200], [1400, 1800]], ... }
    *                               Each day maps to an array of [start, end] ranges (HHMM ints).
@@ -190,7 +190,7 @@ function compatibility(a, b) {
  * @param {number}    minScore  - Exclude matches below this threshold (default 0.3)
  * @returns {{ student: Student, score: number, breakdown: Object }[]}
  */
-function findMatches(target, pool, minScore = 0.3) {
+export function findMatches(target, pool, minScore = 0.3) {
   return pool
     .filter(s => s !== target)
     .map(s => {

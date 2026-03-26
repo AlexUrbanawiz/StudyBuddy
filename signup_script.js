@@ -1,6 +1,6 @@
 import { signUp } from './scripts/auth.mjs';
 import { addUser } from './scripts/crud.mjs';
-import SignupData from './scripts/signup_data.js';
+import SignupData from './scripts/user.js';
 
 document.getElementById('signupForm').addEventListener('submit', async function(event) {
     event.preventDefault();
